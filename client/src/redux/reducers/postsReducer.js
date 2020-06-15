@@ -17,7 +17,6 @@ const postReducer = (state = inititalState, action) => {
                 loadingPosts: true
             }
         case "POSTS_ARE_LOADED":
-            console.log(action.payload)
             return {
                 ...state,
                 loadingPosts: false,

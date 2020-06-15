@@ -17,7 +17,7 @@ export const SinglePost = ({ ...post }) => {
                 </Grid>
                 <Grid item container justify="space-between">
                     <Box style={{ visibility: 'hidden' }}>Hello</Box>
-                    <Button color="secondary" startIcon={<DeleteIcon />} onClick={() => { dispatch(deletePost(post.id)) }}>Delete</Button>
+                    <Button variant="primary.success" startIcon={<DeleteIcon />} onClick={() => { dispatch(deletePost(post.id)) }}>Delete</Button>
                 </Grid>
             </Grid>
         </Paper>

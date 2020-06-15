@@ -7,6 +7,7 @@ import { fetchPosts, createPost } from './redux/actions/postsActions'
 import { SinglePost } from './components/posts/SinglePost'
 // import useForm from './hooks/useForm' !!!!!
 import { useForm } from "react-hook-form";
+import { useTheme } from '@material-ui/core/styles'
 
 function App() {
 
@@ -15,23 +16,29 @@ function App() {
   const loadingPosts = useSelector(state => state.posts.loadingPosts)
   const titleInput = useRef(null)
   const { register, errors, handleSubmit, watch } = useForm();
-
-  const [error, setError] = useState(false) // ??????????????????????????
+  const [titleError, setTitleError] = useState(false)
+  const [descriptionError, setDescriptionError] = useState(false)
 
   useEffect(() => {
     dispatch(fetchPosts())
-    console.log(posts)
   }, [])
 
   useEffect(() => {
-    console.log(errors)
+    // if (Object.entries(errors).length > 0) {
+    //   setTitleError(true)
+    // }
+    const errorsArr = Object.entries(errors)
+
+
   }, [errors])
 
   const onSubmit = async data => {
     await dispatch(createPost({ title: data.title, description: data.description, id: Date.now() }))
   }
 
+  const theme = useTheme()
 
+  console.log(theme)
 
 
   return (
@@ -39,13 +46,12 @@ function App() {
       <Grid direction="column" container>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid xs={12} item>
-            <TextField fullWidth error={error} inputRef={register({ required: true })} name="title" label="Title" />
+            <TextField error={titleError} onChange={() => setTitleError(false)} fullWidth inputRef={register({ required: true })} name="title" label="Title" />
           </Grid>
           <Grid xs={12} item>
-            <TextField fullWidth error={error} inputRef={register({ required: true })} name="description" multiline rows={3} label="Description" />
-            <Button type="submit">Submit</Button>
+            <TextField onChange={() => setDescriptionError(false)} error={descriptionError} fullWidth inputRef={register({ required: true })} name="description" multiline rows={3} label="Description" />
+            <Button color="inherit" type="submit">Submit</Button>
           </Grid>
-
         </form>
         <Grid container direction="column">
           {
