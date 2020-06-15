@@ -7,12 +7,12 @@ import { Provider } from 'react-redux'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#7b1fa2',
-      success: '#00e676'
-    },
-  }
+  // palette: {
+  //   primary: {
+  //     main: '#7b1fa2',
+  //     success: '#00e676'
+  //   },
+  // }
 })
 ReactDOM.render(
   <Provider store={store}>
